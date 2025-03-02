@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="instructions">
+        <h1>Contact Form</h1>
+        <hr class="line">
+        <p>Fill in this form to contact the site owners.</p>
+    </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{ form.csrf_token }}
+
+            <label>{{ form.name.label }} <span>(Required)</span></label>
+            <p>Please enter your full name</p>
+            {{ form.name }}
+
+            <label>{{ form.email.label }} <span>(Required)</span></label>
+            <p>Please enter your e-mail address</p>
+            {{ form.email }}
+
+            <label>{{ form.subject.label }} <span>(Required)</span></label>
+            <p>Please enter the subject for your message.</p>
+            {{ form.subject }}
+
+            <label>{{ form.message.label }} <span>(Required)</span></label>
+            <p>Please enter the message you would like to send.</p>
+            {{ form.message }}
+
+            <button type="submit">Send</button>
+        </form>
+{% endblock %}
+</body>
+</html>
